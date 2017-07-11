@@ -45,25 +45,23 @@ class LoginViewController: UIViewController {
 					
 					if (success) {
 						
-						self.promptMessage(message: "login succeeded")
 						UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
-
 						return
 					}
 					else {
 						
-						self.promptMessage(message: "login failed")
+						self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")
 						return
 					}
 				}
 				else {
 					
-					print("Could not parse JSON!")
+					self.promptMessage(message: "Error: Could not parse JSON!")
 				}
 			}
 			catch {
 				
-				print("Request failed")
+				self.promptMessage(message: "Error: Request failed!")
 			}
 		})
 		
@@ -77,7 +75,7 @@ class LoginViewController: UIViewController {
 	
 	func promptMessage(message: String) {
 		
-		let alert = UIAlertController(title: "Message", message: message, preferredStyle: .alert)
+		let alert = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
 		
 		let okAction = UIAlertAction(title: "OK", style: .default) { action in
 			
