@@ -106,7 +106,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Resources" image="ResourcesIcon" id="Ajy-8h-7ly"/>
+                    <tabBarItem key="tabBarItem" title="Resources" image="ResourcesIcon" selectedImage="ResourcesIcon" id="Ajy-8h-7ly"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXT-qE-mii" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

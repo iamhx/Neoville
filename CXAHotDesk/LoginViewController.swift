@@ -30,8 +30,6 @@ class LoginViewController: UIViewController {
 		}
 		else {
 			
-			showOverlayOnTask(message: "Logging in...")
-			
 			let url = URL(string: "http://neoville.space/login.php")
 			var request = URLRequest(url: url!)
 			request.httpMethod = "POST"
@@ -42,7 +40,7 @@ class LoginViewController: UIViewController {
 				
 				guard data != nil else {
 					
-					print("No data found")
+					self.promptMessage(message: "No data found")
 					return
 				}
 				
@@ -54,35 +52,42 @@ class LoginViewController: UIViewController {
 						
 						if (success) {
 							
-							self.dismiss(animated: false, completion: nil)
-							UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
-							
-							let storyboard = UIStoryboard(name: "Main", bundle: nil)
-							let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
-							self.present(mainMenuVC, animated: true, completion: nil)
-							return
+							self.dismiss(animated: false, completion: { action in
+								
+								UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
+								
+								let storyboard = UIStoryboard(name: "Main", bundle: nil)
+								let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
+								self.present(mainMenuVC, animated: true, completion: nil)
+							})
 						}
 						else {
 							
-							self.dismiss(animated: false, completion: nil)
-							self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")
-							return
+							self.dismiss(animated: false, completion: { action in
+								
+								self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")})
 						}
 					}
 					else {
 						
-						self.dismiss(animated: false, completion: nil)
-						self.promptMessage(message: "Error: Could not parse JSON!")
+						self.dismiss(animated: false, completion: { action in
+							
+							self.promptMessage(message: "Error: Could not parse JSON!")
+						})
 					}
 				}
 				catch {
 					
-					self.dismiss(animated: false, completion: nil)
-					self.promptMessage(message: "Error: Request failed!")
+					self.dismiss(animated: false, completion: { action in
+						
+						self.promptMessage(message: "Error: Request failed!")
+					})
 				}
 			})
 			
 			task.resume()
+			showOverlayOnTask(message: "Logging in...")
+			
 		}
 	}
 	
@@ -95,9 +100,7 @@ class LoginViewController: UIViewController {
 		
 		let alert = UIAlertController(title: "Login Failed", message: message, preferredStyle: .alert)
 		
-		let okAction = UIAlertAction(title: "OK", style: .default) { action in
-			
-		}
+		let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
 		
 		alert.addAction(okAction)
 		self.present(alert, animated: true, completion: nil)
@@ -113,7 +116,7 @@ class LoginViewController: UIViewController {
 		loadingIndicator.startAnimating();
 		
 		alert.view.addSubview(loadingIndicator)
-		present(alert, animated: true, completion: nil)
+		self.present(alert, animated: true, completion: nil)
 	}
 	
     /*
