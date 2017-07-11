@@ -23,49 +23,67 @@ class LoginViewController: UIViewController {
 	
 	@IBAction func btnLogin(_ sender: UIButton) {
 		
-		let url = URL(string: "http://neoville.space/login.php")
-		var request = URLRequest(url: url!)
-		request.httpMethod = "POST"
-		let postString = "username=\(txtUsername.text!)&password=\(txtPassword.text!)"
-		request.httpBody = postString.data(using: .utf8)
 		
-		let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+		if (txtUsername.text!.isEmpty || txtPassword.text!.isEmpty) {
 			
-			guard data != nil else {
-				
-				print("No data found")
-				return
-			}
+			promptMessage(message: "One or more required fields is missing. Please try again.")
+		}
+		else {
 			
-			do {
+			showOverlayOnTask(message: "Logging in...")
+			
+			let url = URL(string: "http://neoville.space/login.php")
+			var request = URLRequest(url: url!)
+			request.httpMethod = "POST"
+			let postString = "username=\(txtUsername.text!)&password=\(txtPassword.text!)"
+			request.httpBody = postString.data(using: .utf8)
+			
+			let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
 				
-				if let jsonData = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary {
+				guard data != nil else {
 					
-					let success = jsonData.value(forKey: "success") as! Bool
+					print("No data found")
+					return
+				}
+				
+				do {
 					
-					if (success) {
+					if let jsonData = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary {
 						
-						UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
-						return
+						let success = jsonData.value(forKey: "success") as! Bool
+						
+						if (success) {
+							
+							self.dismiss(animated: false, completion: nil)
+							UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
+							
+							let storyboard = UIStoryboard(name: "Main", bundle: nil)
+							let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
+							self.present(mainMenuVC, animated: true, completion: nil)
+							return
+						}
+						else {
+							
+							self.dismiss(animated: false, completion: nil)
+							self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")
+							return
+						}
 					}
 					else {
 						
-						self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")
-						return
+						self.dismiss(animated: false, completion: nil)
+						self.promptMessage(message: "Error: Could not parse JSON!")
 					}
 				}
-				else {
+				catch {
 					
-					self.promptMessage(message: "Error: Could not parse JSON!")
+					self.dismiss(animated: false, completion: nil)
+					self.promptMessage(message: "Error: Request failed!")
 				}
-			}
-			catch {
-				
-				self.promptMessage(message: "Error: Request failed!")
-			}
-		})
-		
-		task.resume()
+			})
+			
+			task.resume()
+		}
 	}
 	
     override func didReceiveMemoryWarning() {
@@ -84,7 +102,20 @@ class LoginViewController: UIViewController {
 		alert.addAction(okAction)
 		self.present(alert, animated: true, completion: nil)
 	}
-    
+	
+	func showOverlayOnTask(message: String) {
+		
+		let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+		
+		let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+		loadingIndicator.hidesWhenStopped = true
+		loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+		loadingIndicator.startAnimating();
+		
+		alert.view.addSubview(loadingIndicator)
+		present(alert, animated: true, completion: nil)
+	}
+	
     /*
     // MARK: - Navigation
 

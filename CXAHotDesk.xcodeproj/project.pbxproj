@@ -11,6 +11,7 @@
 		E50F56521F0BD6E0008B03D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50F56501F0BD6E0008B03D4 /* Main.storyboard */; };
 		E50F56541F0BD6E0008B03D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E50F56531F0BD6E0008B03D4 /* Assets.xcassets */; };
 		E50F56571F0BD6E0008B03D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50F56551F0BD6E0008B03D4 /* LaunchScreen.storyboard */; };
+		E551B5E91F14662500697904 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E551B5E81F14662500697904 /* MainMenuController.swift */; };
 		E5E1C67F1F0C92F20056E3E6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E1C67E1F0C92F20056E3E6 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +22,7 @@
 		E50F56531F0BD6E0008B03D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E50F56561F0BD6E0008B03D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E50F56581F0BD6E0008B03D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E551B5E81F14662500697904 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		E5E1C67E1F0C92F20056E3E6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,6 +62,7 @@
 				E50F56551F0BD6E0008B03D4 /* LaunchScreen.storyboard */,
 				E50F56581F0BD6E0008B03D4 /* Info.plist */,
 				E5E1C67E1F0C92F20056E3E6 /* LoginViewController.swift */,
+				E551B5E81F14662500697904 /* MainMenuController.swift */,
 			);
 			path = CXAHotDesk;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			files = (
 				E5E1C67F1F0C92F20056E3E6 /* LoginViewController.swift in Sources */,
 				E50F564D1F0BD6E0008B03D4 /* AppDelegate.swift in Sources */,
+				E551B5E91F14662500697904 /* MainMenuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
