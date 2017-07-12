@@ -171,14 +171,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKj-Ul-fzg">
-                                                    <rect key="frame" x="157" y="11" width="61" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKj-Ul-fzg">
+                                                    <rect key="frame" x="158" y="11.5" width="59" height="20"/>
                                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                     <color key="textColor" red="0.86126536130905151" green="0.32483875751495361" blue="0.31809821724891663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pKj-Ul-fzg" firstAttribute="centerY" secondItem="Hgn-JT-876" secondAttribute="centerY" id="LkL-IC-r1B"/>
+                                                <constraint firstItem="pKj-Ul-fzg" firstAttribute="centerX" secondItem="Hgn-JT-876" secondAttribute="centerX" id="hRN-kW-pmg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -193,7 +196,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ls3-6i-tgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2215" y="1039"/>
+            <point key="canvasLocation" x="2438" y="1081"/>
         </scene>
         <!--History-->
         <scene sceneID="Ye0-O9-Mb1">
@@ -212,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbd-Ci-Ca7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2737" y="384"/>
+            <point key="canvasLocation" x="2433" y="341"/>
         </scene>
         <!--Resources-->
         <scene sceneID="PR2-PY-Mg0">
@@ -231,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXT-qE-mii" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2410" y="-296"/>
+            <point key="canvasLocation" x="2438" y="-342"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="GjE-sA-Z4r">
@@ -269,7 +272,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBg-mB-Awf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1724" y="-296"/>
+            <point key="canvasLocation" x="1727" y="-342"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="72G-T8-IjS">
@@ -288,7 +291,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rj8-Ep-DWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="384"/>
+            <point key="canvasLocation" x="1729" y="341"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UAJ-gj-3F4">
@@ -307,7 +310,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vk7-WO-BUZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1493.5999999999999" y="1038.5307346326838"/>
+            <point key="canvasLocation" x="1729" y="1082"/>
         </scene>
     </scenes>
     <resources>

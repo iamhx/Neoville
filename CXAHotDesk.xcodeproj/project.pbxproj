@@ -13,6 +13,8 @@
 		E50F56571F0BD6E0008B03D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50F56551F0BD6E0008B03D4 /* LaunchScreen.storyboard */; };
 		E551B5E91F14662500697904 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E551B5E81F14662500697904 /* MainMenuController.swift */; };
 		E5BBF8A51F165AEA0075D95F /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A41F165AEA0075D95F /* MoreController.swift */; };
+		E5BBF8A71F1674010075D95F /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A61F1674010075D95F /* ContactModel.swift */; };
+		E5BBF8A91F1674250075D95F /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A81F1674250075D95F /* LoginModel.swift */; };
 		E5E1C67F1F0C92F20056E3E6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E1C67E1F0C92F20056E3E6 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,8 @@
 		E50F56581F0BD6E0008B03D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E551B5E81F14662500697904 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		E5BBF8A41F165AEA0075D95F /* MoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
+		E5BBF8A61F1674010075D95F /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
+		E5BBF8A81F1674250075D95F /* LoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		E5E1C67E1F0C92F20056E3E6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +70,8 @@
 				E5E1C67E1F0C92F20056E3E6 /* LoginViewController.swift */,
 				E551B5E81F14662500697904 /* MainMenuController.swift */,
 				E5BBF8A41F165AEA0075D95F /* MoreController.swift */,
+				E5BBF8A61F1674010075D95F /* ContactModel.swift */,
+				E5BBF8A81F1674250075D95F /* LoginModel.swift */,
 			);
 			path = CXAHotDesk;
 			sourceTree = "<group>";
@@ -144,8 +150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5E1C67F1F0C92F20056E3E6 /* LoginViewController.swift in Sources */,
+				E5BBF8A91F1674250075D95F /* LoginModel.swift in Sources */,
 				E50F564D1F0BD6E0008B03D4 /* AppDelegate.swift in Sources */,
 				E5BBF8A51F165AEA0075D95F /* MoreController.swift in Sources */,
+				E5BBF8A71F1674010075D95F /* ContactModel.swift in Sources */,
 				E551B5E91F14662500697904 /* MainMenuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

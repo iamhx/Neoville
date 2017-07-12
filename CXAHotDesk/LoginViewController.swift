@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
 			txtUsername.resignFirstResponder()
 			txtPassword.resignFirstResponder()
 			showOverlayOnTask(message: "Logging in...")
-			requestLogin()
+			LoginModel().requestLogin(user: txtUsername.text!, pass: txtPassword.text!, VC: self)
 		}
 	}
 	
@@ -55,82 +55,6 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-	
-	func requestLogin() {
-		
-		let url = URL(string: "http://neoville.space/login.php")
-		var request = URLRequest(url: url!)
-		request.httpMethod = "POST"
-		let postString = "username=\(txtUsername.text!)&password=\(txtPassword.text!)"
-		request.httpBody = postString.data(using: .utf8)
-		
-		let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-			
-			guard data != nil else {
-				
-				self.promptMessage(message: "No data found")
-				return
-			}
-			
-			do {
-				
-				if let jsonData = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary {
-					
-					let success = jsonData.value(forKey: "success") as! Bool
-					
-					if (success) {
-						
-						DispatchQueue.main.async {
-							
-							self.dismiss(animated: false, completion: { action in
-								
-								UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
-								
-								let storyboard = UIStoryboard(name: "Main", bundle: nil)
-								let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
-								self.present(mainMenuVC, animated: true, completion: nil)
-							})
-						}
-						
-						return
-					}
-					else {
-						
-						DispatchQueue.main.async {
-							
-							self.dismiss(animated: false, completion: { action in
-								
-								self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")
-							})
-						}
-						return
-					}
-				}
-				else {
-					
-					DispatchQueue.main.async {
-						
-						self.dismiss(animated: false, completion: { action in
-							
-							self.promptMessage(message: "Error: Could not parse JSON!")
-						})
-					}
-				}
-			}
-			catch {
-				
-				DispatchQueue.main.async {
-					
-					self.dismiss(animated: false, completion: { action in
-						
-						self.promptMessage(message: "Error: Request failed!")
-					})
-				}
-			}
-		})
-		
-		task.resume()
-	}
 	
 	func promptMessage(message: String) {
 		
