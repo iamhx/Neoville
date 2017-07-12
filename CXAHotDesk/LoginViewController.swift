@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
 //		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
 //		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
 //	}
-	
+
 	@IBAction func btnLogin(_ sender: UIButton) {
 		
 		if (currentReachabilityStatus == .notReachable) {
@@ -78,39 +78,51 @@ class LoginViewController: UIViewController {
 					
 					if (success) {
 						
-						self.dismiss(animated: false, completion: { action in
+						DispatchQueue.main.async {
 							
-							UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
-							
-							let storyboard = UIStoryboard(name: "Main", bundle: nil)
-							let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
-							self.present(mainMenuVC, animated: true, completion: nil)
-						})
-						return
+							self.dismiss(animated: false, completion: { action in
+								
+								UserDefaults.standard.set(self.txtUsername.text!, forKey: "currentSession")
+								
+								let storyboard = UIStoryboard(name: "Main", bundle: nil)
+								let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
+								self.present(mainMenuVC, animated: true, completion: nil)
+							})
+							return
+						}
 					}
 					else {
 						
-						self.dismiss(animated: false, completion: { action in
+						DispatchQueue.main.async {
 							
-							self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")}
-						)
+							self.dismiss(animated: false, completion: { action in
+								
+								self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.")}
+							)
+						}
 						return
 					}
 				}
 				else {
 					
-					self.dismiss(animated: false, completion: { action in
+					DispatchQueue.main.async {
 						
-						self.promptMessage(message: "Error: Could not parse JSON!")
-					})
+						self.dismiss(animated: false, completion: { action in
+							
+							self.promptMessage(message: "Error: Could not parse JSON!")
+						})
+					}
 				}
 			}
 			catch {
 				
-				self.dismiss(animated: false, completion: { action in
+				DispatchQueue.main.async {
 					
-					self.promptMessage(message: "Error: Request failed!")
-				})
+					self.dismiss(animated: false, completion: { action in
+						
+						self.promptMessage(message: "Error: Request failed!")
+					})
+				}
 			}
 		})
 		
