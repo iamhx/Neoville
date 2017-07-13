@@ -192,11 +192,34 @@
                             <outlet property="delegate" destination="V33-bl-pS1" id="Vai-Qm-K5e"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="CXA HotDesk" id="rup-tv-ZZK"/>
+                    <navigationItem key="navigationItem" title="CXA HotDesk" id="rup-tv-ZZK">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="pIh-Eg-lFY"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="GFs-Fb-i0c" kind="show" identifier="showDetails" id="nwD-aA-KpR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ls3-6i-tgb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2438" y="1081"/>
+        </scene>
+        <!--Contact Details-->
+        <scene sceneID="lOj-hV-vnh">
+            <objects>
+                <viewController title="Contact Details" id="GFs-Fb-i0c" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gy9-iR-Mns"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xhi-6G-4Mv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Nh-bV-o3Y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.54477393627166748" green="0.21567675471305847" blue="0.57527351379394531" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zz5-v6-VOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3250" y="1082"/>
         </scene>
         <!--History-->
         <scene sceneID="Ye0-O9-Mb1">

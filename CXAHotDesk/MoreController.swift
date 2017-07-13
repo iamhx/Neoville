@@ -34,6 +34,15 @@ class MoreController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
+		if (indexPath.section == 0) {
+			
+			if (indexPath.row == 0) {
+				
+				self.performSegue(withIdentifier: "showDetails", sender: self)
+			}
+		}
+		
+		
 		if (indexPath.section == 2) {
 			
 			if (indexPath.row == 0) {
