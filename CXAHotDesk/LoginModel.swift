@@ -38,7 +38,8 @@ class LoginModel: NSObject {
 							
 							VC.dismiss(animated: false, completion: { action in
 								
-								UserDefaults.standard.set(user, forKey: "currentSession")
+								UserDefaults.standard.set(user, forKey: "currentUser")
+								ContactModel().requestDetails(user: user)
 								
 								let storyboard = UIStoryboard(name: "Main", bundle: nil)
 								let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController

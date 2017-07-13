@@ -41,7 +41,7 @@ class MoreController: UITableViewController {
 				let alert = UIAlertController(title: "", message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
 				let logoutAction = UIAlertAction(title: "Log Out", style: .destructive, handler: {action in
 
-					UserDefaults.standard.removeObject(forKey: "currentSession")
+					ContactModel().deleteContacts()
 					let storyboard = UIStoryboard(name: "Main", bundle: nil)
 					let loginVC = storyboard.instantiateViewController(withIdentifier: "LogInID")
 					self.present(loginVC, animated: true, completion: nil)

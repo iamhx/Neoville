@@ -92,6 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		
 		//setStatusBarBackgroundColor(color: .white)
+		if UserDefaults.standard.string(forKey: "currentUser") != nil {
+			
+			ContactModel().deleteContacts()
+		}
 		
 		return true
 	}
@@ -117,9 +121,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 		
-		if UserDefaults.standard.string(forKey: "currentSession") != nil {
+		if UserDefaults.standard.string(forKey: "currentUser") != nil {
 			
-			UserDefaults.standard.removeObject(forKey: "currentSession")
+			ContactModel().deleteContacts()
 		}
 	}
 
