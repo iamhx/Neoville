@@ -42,7 +42,6 @@ class MoreController: UITableViewController {
 			}
 		}
 		
-		
 		if (indexPath.section == 2) {
 			
 			if (indexPath.row == 0) {
