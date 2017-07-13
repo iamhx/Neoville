@@ -262,7 +262,7 @@
         <!--Main Menu-->
         <scene sceneID="GjE-sA-Z4r">
             <objects>
-                <tabBarController storyboardIdentifier="MainMenuID" title="Main Menu" id="Rqr-PU-Yua" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainMenuID" title="Main Menu" id="Rqr-PU-Yua" customClass="MainMenuController" customModule="CXAHotDesk" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="x7b-RC-T09">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

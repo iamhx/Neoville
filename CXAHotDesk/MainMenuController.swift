@@ -8,11 +8,12 @@
 
 import UIKit
 
-class MainMenuController: UITabBarController {
+class MainMenuController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		self.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -20,7 +21,16 @@ class MainMenuController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-	
+
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		
+		if (tabBarController.selectedIndex == 2) {
+			
+			if let vc = viewController as? UINavigationController {
+				vc.popViewController(animated: false)
+			}
+		}
+	}
 
     /*
     // MARK: - Navigation
