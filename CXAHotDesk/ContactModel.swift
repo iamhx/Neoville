@@ -31,11 +31,11 @@ class ContactModel: NSObject {
 				if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSArray {
 					
 					let jsonElement : NSDictionary = jsonResult[0] as! NSDictionary
-					let email = jsonElement["Email"] as! String
-					let firstName = jsonElement["FirstName"] as! String
-					let lastName = jsonElement["LastName"] as! String
-					let dateOfBirth = jsonElement["DateOfBirth"] as! String
-					let role = jsonElement["Role"] as! String
+					let email = jsonElement["Email"]!
+					let firstName = jsonElement["FirstName"]!
+					let lastName = jsonElement["LastName"]!
+					let dateOfBirth = jsonElement["DateOfBirth"]!
+					let role = jsonElement["Role"]!
 					
 					self.setContacts(email: email, firstName: firstName, lastName: lastName, dateOfBirth: dateOfBirth, role: role)
 				}
@@ -53,7 +53,7 @@ class ContactModel: NSObject {
 		task.resume()
 	}
 	
-	func setContacts(email: String, firstName: String, lastName: String, dateOfBirth: String, role: String) {
+	func setContacts(email: Any, firstName: Any, lastName: Any, dateOfBirth: Any, role: Any) {
 		
 		UserDefaults.standard.set(email, forKey: "userEmail")
 		UserDefaults.standard.set(firstName, forKey: "userFirstName")
@@ -70,16 +70,5 @@ class ContactModel: NSObject {
 		UserDefaults.standard.removeObject(forKey: "userLastName")
 		UserDefaults.standard.removeObject(forKey: "userDOB")
 		UserDefaults.standard.removeObject(forKey: "userRole")
-	}
-	
-	func printContacts() {
-		
-		print(UserDefaults.standard.string(forKey: "currentUser"))
-		print(UserDefaults.standard.string(forKey: "userEmail"))
-		print(UserDefaults.standard.string(forKey: "userFirstName"))
-		print(UserDefaults.standard.string(forKey: "userLastName"))
-		print(UserDefaults.standard.string(forKey: "userDOB"))
-		print(UserDefaults.standard.string(forKey: "userRole"))
-
 	}
 }

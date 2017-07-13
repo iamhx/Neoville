@@ -34,12 +34,12 @@ class LoginModel: NSObject {
 					
 					if (success) {
 						
+						ContactModel().requestDetails(user: user)
+						UserDefaults.standard.set(user, forKey: "currentUser")
+
 						DispatchQueue.main.async {
 							
 							VC.dismiss(animated: false, completion: { action in
-								
-								UserDefaults.standard.set(user, forKey: "currentUser")
-								ContactModel().requestDetails(user: user)
 								
 								let storyboard = UIStoryboard(name: "Main", bundle: nil)
 								let mainMenuVC = storyboard.instantiateViewController(withIdentifier: "MainMenuID") as! UITabBarController
