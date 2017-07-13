@@ -41,12 +41,12 @@ class ContactModel: NSObject {
 				}
 				else {
 					
-					print("Could not parse JSON")
+					print("Could not parse JSON!")
 				}
 			}
 			catch {
 				
-				print("Request failed")
+				print("Request failed!")
 			}
 		})
 		
