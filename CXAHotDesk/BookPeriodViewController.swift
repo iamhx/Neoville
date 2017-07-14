@@ -8,21 +8,75 @@
 
 import UIKit
 
-class BookPeriodViewController: UIViewController, UITextFieldDelegate {
+class availResourceCell : UITableViewCell {
+	
+	@IBOutlet weak var lblResourceID: UILabel!
+	
+}
 
+class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+
+	@IBOutlet weak var availResourcesTableView: UITableView!
+	
+	@IBOutlet weak var lblAvailResources: UILabel!
+	
 	@IBOutlet weak var txtStartDateTime: UITextField!
 	
 	@IBOutlet weak var txtEndDateTime: UITextField!
 	
 	@IBAction func btnCheckAvailability(_ sender: UIButton) {
 		
-		
+		if ((txtStartDateTime.text?.isEmpty)! || (txtEndDateTime.text?.isEmpty)!) {
+			
+			let alert = UIAlertController(title: "Error", message: "One or more required fields is missing. Please check again.", preferredStyle: .alert)
+			let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(okAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+		else {
+			
+			txtStartDateTime.resignFirstResponder()
+			txtEndDateTime.resignFirstResponder()
+			showOverlayOnTask(message: "Please wait...")
+			
+			let dateFormatter = DateFormatter()
+			let timeFormatter = DateFormatter()
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			timeFormatter.dateFormat = "HH:mm:ss"
+			let date = dateFormatter.string(from: startDate)
+			let time = timeFormatter.string(from: startDate)
+			CheckAvailableModel().checkAvailable(resourceType: resourceType!, startDate: date, startTime: time, VC: self)
+			
+			if (resourceIDs.count > 0) {
+				
+				DispatchQueue.main.async {
+					
+					self.dismiss(animated: false, completion: { action in
+						
+						self.lblAvailResources.isHidden = false
+						self.availResourcesTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .automatic)
+					})
+				}
+			}
+			else {
+				
+				DispatchQueue.main.async {
+					
+					self.dismiss(animated: false, completion: { action in
+						
+						print("No available resources")
+					})
+				}
+			}
+
+		}
 	}
 	
 	var resourceType : String?
 	let startTimePicker = UIDatePicker()
 	let endTimePicker = UIDatePicker()
 	var startDate = Date()
+	var resourceIDs = NSArray()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +84,10 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
 		
 		hideKeyboardWhenTappedAround()
+		
+		availResourcesTableView.delegate = self
+		availResourcesTableView.dataSource = self
+		
 		txtStartDateTime.delegate = self
 		txtEndDateTime.delegate = self
 		txtEndDateTime.isUserInteractionEnabled = false
@@ -90,9 +148,21 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate {
 		txtEndDateTime.text = dateFormatter.string(from: endTimePicker.date)
 	}
 	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		// Return the number of feed items
+		
+		return resourceIDs.count
+	}
 	
-    
-
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		
+		let cell = availResourcesTableView.dequeueReusableCell(withIdentifier: "availResourceCell") as! availResourceCell
+		
+		cell.lblResourceID?.text = resourceIDs[indexPath.row] as? String
+		return cell
+	}
+	
+	
     /*
     // MARK: - Navigation
 

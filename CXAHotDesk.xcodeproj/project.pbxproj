@@ -15,6 +15,7 @@
 		E517BA591F17918E0054DD16 /* ResourceTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517BA581F17918E0054DD16 /* ResourceTypeModel.swift */; };
 		E517BA5B1F1796C90054DD16 /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517BA5A1F1796C90054DD16 /* ResourcesViewController.swift */; };
 		E5374BB91F18C0DE003F4369 /* BookPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5374BB81F18C0DE003F4369 /* BookPeriodViewController.swift */; };
+		E5374BBB1F18E6B5003F4369 /* CheckAvailableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5374BBA1F18E6B5003F4369 /* CheckAvailableModel.swift */; };
 		E551B5E91F14662500697904 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E551B5E81F14662500697904 /* MainMenuController.swift */; };
 		E5BBF8A51F165AEA0075D95F /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A41F165AEA0075D95F /* MoreController.swift */; };
 		E5BBF8A71F1674010075D95F /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A61F1674010075D95F /* ContactModel.swift */; };
@@ -33,6 +34,7 @@
 		E517BA581F17918E0054DD16 /* ResourceTypeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceTypeModel.swift; sourceTree = "<group>"; };
 		E517BA5A1F1796C90054DD16 /* ResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesViewController.swift; sourceTree = "<group>"; };
 		E5374BB81F18C0DE003F4369 /* BookPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookPeriodViewController.swift; sourceTree = "<group>"; };
+		E5374BBA1F18E6B5003F4369 /* CheckAvailableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAvailableModel.swift; sourceTree = "<group>"; };
 		E551B5E81F14662500697904 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		E5BBF8A41F165AEA0075D95F /* MoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
 		E5BBF8A61F1674010075D95F /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				E517BA581F17918E0054DD16 /* ResourceTypeModel.swift */,
 				E517BA5A1F1796C90054DD16 /* ResourcesViewController.swift */,
 				E5374BB81F18C0DE003F4369 /* BookPeriodViewController.swift */,
+				E5374BBA1F18E6B5003F4369 /* CheckAvailableModel.swift */,
 			);
 			path = CXAHotDesk;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				E5374BB91F18C0DE003F4369 /* BookPeriodViewController.swift in Sources */,
 				E517BA571F174B870054DD16 /* DetailsViewController.swift in Sources */,
 				E517BA591F17918E0054DD16 /* ResourceTypeModel.swift in Sources */,
+				E5374BBB1F18E6B5003F4369 /* CheckAvailableModel.swift in Sources */,
 				E517BA5B1F1796C90054DD16 /* ResourcesViewController.swift in Sources */,
 				E5BBF8A71F1674010075D95F /* ContactModel.swift in Sources */,
 				E551B5E91F14662500697904 /* MainMenuController.swift in Sources */,
