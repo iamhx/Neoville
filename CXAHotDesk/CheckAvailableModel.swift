@@ -11,12 +11,12 @@ import UIKit
 
 class CheckAvailableModel: NSObject {
 	
-	func checkAvailable(resourceType: String, startDate: String, startTime: String, VC: BookPeriodViewController) {
+	func checkAvailable(resourceType: String, startDateTime: String, endDateTime: String, VC: BookPeriodViewController) {
 		
 		let url = URL(string: "http://neoville.space/checkavailable.php")
 		var request = URLRequest(url: url!)
 		request.httpMethod = "POST"
-		let postString = "resourceType=\(resourceType)&startDate=\(startDate)&startTime=\(startTime)"
+		let postString = "resourceType=\(resourceType)&startDateTime=\(startDateTime)&endDateTime=\(endDateTime)"
 		request.httpBody = postString.data(using: .utf8)
 		
 		let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in

@@ -14,11 +14,9 @@ class availResourceCell : UITableViewCell {
 	
 }
 
-class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class BookPeriodViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
 	@IBOutlet weak var availResourcesTableView: UITableView!
-	
-	@IBOutlet weak var lblAvailResources: UILabel!
 	
 	@IBOutlet weak var txtStartDateTime: UITextField!
 	
@@ -40,12 +38,10 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 			showOverlayOnTask(message: "Please wait...")
 			
 			let dateFormatter = DateFormatter()
-			let timeFormatter = DateFormatter()
-			dateFormatter.dateFormat = "yyyy-MM-dd"
-			timeFormatter.dateFormat = "HH:mm:ss"
-			let date = dateFormatter.string(from: startDate)
-			let time = timeFormatter.string(from: startDate)
-			CheckAvailableModel().checkAvailable(resourceType: resourceType!, startDate: date, startTime: time, VC: self)
+			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+			let startDateTime = dateFormatter.string(from: startDate)
+			let endDateTime = dateFormatter.string(from: endDate)
+			CheckAvailableModel().checkAvailable(resourceType: resourceType!, startDateTime: startDateTime, endDateTime: endDateTime, VC: self)
 			
 			if (resourceIDs.count > 0) {
 				
@@ -53,7 +49,6 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 					
 					self.dismiss(animated: false, completion: { action in
 						
-						self.lblAvailResources.isHidden = false
 						self.availResourcesTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .automatic)
 					})
 				}
@@ -73,9 +68,11 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 	}
 	
 	var resourceType : String?
+	var selectedID : String?
 	let startTimePicker = UIDatePicker()
 	let endTimePicker = UIDatePicker()
 	var startDate = Date()
+	var endDate = Date()
 	var resourceIDs = NSArray()
 	
     override func viewDidLoad() {
@@ -83,10 +80,8 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 
         // Do any additional setup after loading the view.
 		
-		hideKeyboardWhenTappedAround()
-		
-		availResourcesTableView.delegate = self
-		availResourcesTableView.dataSource = self
+		self.availResourcesTableView.delegate = self
+		self.availResourcesTableView.dataSource = self
 		
 		txtStartDateTime.delegate = self
 		txtEndDateTime.delegate = self
@@ -133,6 +128,9 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 		else {
 			
 			txtEndDateTime.text = ""
+			
+			resourceIDs = NSArray()
+			availResourcesTableView.reloadData()
 		}
 		
 		let dateFormatter = DateFormatter()
@@ -143,9 +141,12 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 	
 	func endDateChanged() {
 		
+		resourceIDs = NSArray()
+		availResourcesTableView.reloadData()
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd/MM/yy hh:mm a"
 		txtEndDateTime.text = dateFormatter.string(from: endTimePicker.date)
+		endDate = dateFormatter.date(from: txtEndDateTime.text!)!
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,15 +163,35 @@ class BookPeriodViewController: UIViewController, UITextFieldDelegate, UITableVi
 		return cell
 	}
 	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		selectedID = resourceIDs[indexPath.row] as? String
+		
+		self.performSegue(withIdentifier: "showConfirmBooking", sender: self)
+		availResourcesTableView.deselectRow(at: indexPath, animated: true)
+	}
 	
-    /*
+	override func touchesBegan(_: Set<UITouch>, with: UIEvent?) {
+		self.view.endEditing(true)
+	}
+	
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+		
+		if (segue.identifier == "showConfirmBooking") {
+			
+			
+			let destination = segue.destination as! ConfirmBookingViewController
+			destination.selectedID = selectedID
+			destination.startDate = startDate
+			destination.endDate = endDate
+		}
     }
-    */
+
 
 }

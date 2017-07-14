@@ -66,7 +66,6 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 		self.performSegue(withIdentifier: "showBookPeriod", sender: self)
 		resourcesTableView.deselectRow(at: indexPath, animated: true)
 
-		
 	}
 	
 	

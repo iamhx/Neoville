@@ -16,6 +16,8 @@
 		E517BA5B1F1796C90054DD16 /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E517BA5A1F1796C90054DD16 /* ResourcesViewController.swift */; };
 		E5374BB91F18C0DE003F4369 /* BookPeriodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5374BB81F18C0DE003F4369 /* BookPeriodViewController.swift */; };
 		E5374BBB1F18E6B5003F4369 /* CheckAvailableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5374BBA1F18E6B5003F4369 /* CheckAvailableModel.swift */; };
+		E5374BBD1F1923BB003F4369 /* ConfirmBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5374BBC1F1923BB003F4369 /* ConfirmBookingViewController.swift */; };
+		E5374BBF1F1932C4003F4369 /* BookResourceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5374BBE1F1932C4003F4369 /* BookResourceModel.swift */; };
 		E551B5E91F14662500697904 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E551B5E81F14662500697904 /* MainMenuController.swift */; };
 		E5BBF8A51F165AEA0075D95F /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A41F165AEA0075D95F /* MoreController.swift */; };
 		E5BBF8A71F1674010075D95F /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBF8A61F1674010075D95F /* ContactModel.swift */; };
@@ -35,6 +37,8 @@
 		E517BA5A1F1796C90054DD16 /* ResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesViewController.swift; sourceTree = "<group>"; };
 		E5374BB81F18C0DE003F4369 /* BookPeriodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookPeriodViewController.swift; sourceTree = "<group>"; };
 		E5374BBA1F18E6B5003F4369 /* CheckAvailableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAvailableModel.swift; sourceTree = "<group>"; };
+		E5374BBC1F1923BB003F4369 /* ConfirmBookingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmBookingViewController.swift; sourceTree = "<group>"; };
+		E5374BBE1F1932C4003F4369 /* BookResourceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookResourceModel.swift; sourceTree = "<group>"; };
 		E551B5E81F14662500697904 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		E5BBF8A41F165AEA0075D95F /* MoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
 		E5BBF8A61F1674010075D95F /* ContactModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 				E517BA5A1F1796C90054DD16 /* ResourcesViewController.swift */,
 				E5374BB81F18C0DE003F4369 /* BookPeriodViewController.swift */,
 				E5374BBA1F18E6B5003F4369 /* CheckAvailableModel.swift */,
+				E5374BBC1F1923BB003F4369 /* ConfirmBookingViewController.swift */,
+				E5374BBE1F1932C4003F4369 /* BookResourceModel.swift */,
 			);
 			path = CXAHotDesk;
 			sourceTree = "<group>";
@@ -167,6 +173,8 @@
 				E5E1C67F1F0C92F20056E3E6 /* LoginViewController.swift in Sources */,
 				E5BBF8A91F1674250075D95F /* LoginModel.swift in Sources */,
 				E50F564D1F0BD6E0008B03D4 /* AppDelegate.swift in Sources */,
+				E5374BBD1F1923BB003F4369 /* ConfirmBookingViewController.swift in Sources */,
+				E5374BBF1F1932C4003F4369 /* BookResourceModel.swift in Sources */,
 				E5BBF8A51F165AEA0075D95F /* MoreController.swift in Sources */,
 				E5374BB91F18C0DE003F4369 /* BookPeriodViewController.swift in Sources */,
 				E517BA571F174B870054DD16 /* DetailsViewController.swift in Sources */,
