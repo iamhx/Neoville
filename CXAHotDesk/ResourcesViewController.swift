@@ -20,6 +20,8 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 	var resourceType : String?
 	var booked : Bool = false
 	let username = UserDefaults.standard.string(forKey: "currentUser")
+	var timer : Timer?
+	var durationInSeconds : Int?
 	
 	@IBOutlet weak var lblResourceID: UILabel!
 	@IBOutlet weak var lblTimerDescription: UILabel!
@@ -34,6 +36,7 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 			
 			let yesAction = UIAlertAction(title: "Cancel Session", style: .destructive, handler: { action in
 			
+				self.timer?.invalidate()
 				self.showOverlayOnTask(message: "Please wait...")
 				self.updateEndDateTime(user: self.username!, endDateTime: self.getCurrentDate(), completedOrCancelled: "Cancelled")
 			})
@@ -50,6 +53,7 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 			
 			let yesAction = UIAlertAction(title: "End Session", style: .destructive, handler: { action in
 				
+				self.timer?.invalidate()
 				self.showOverlayOnTask(message: "Please wait...")
 				self.updateEndDateTime(user: self.username!, endDateTime: self.getCurrentDate(), completedOrCancelled: "Completed")
 			})
@@ -165,21 +169,24 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
 		
 		self.resourcesTableView.delegate = self
 		self.resourcesTableView.dataSource = self
 		
 		resources.delegate = self
 		resources.downloadItems()
-		CheckBookedModel().checkBooked(user: username!, currentDateTime: getCurrentDate(), VC: self)
 		
 		let refreshItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshDetails))
 		
 		self.navigationItem.rightBarButtonItem = refreshItem
+		
+		CheckBookedModel().checkBooked(user: username!, currentDateTime: getCurrentDate(), VC: self)
     }
 	
 	func refreshDetails() {
 		
+		timer?.invalidate()
 		showOverlayOnTask(message: "Refreshing...")
 		CheckBookedModel().checkBooked(user: username!, currentDateTime: getCurrentDate(), VC: self)
 	}
@@ -231,6 +238,13 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 		resourcesTableView.deselectRow(at: indexPath, animated: true)
 	}
 	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		NotificationCenter.default.removeObserver(self, name: .UIApplicationDidEnterBackground, object: nil)
+		NotificationCenter.default.removeObserver(self, name: .UIApplicationWillEnterForeground, object: nil)
+	}
+	
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -245,5 +259,37 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 		}
     }
 	
+	func pauseTimer() {
+		
+		timer?.invalidate()
+	}
+	
+	func resumeTimer() {
+		
+		showOverlayOnTask(message: "Refreshing...")
+		CheckBookedModel().checkBooked(user: username!, currentDateTime: getCurrentDate(), VC: self)
+	}
+	
+	func timerTickStart() {
+		
+		durationInSeconds = durationInSeconds! - 1
+		self.lblTimerDescription.text = formattedTime(totalSeconds: durationInSeconds!)
+		
+		if (durationInSeconds! <= 0) {
+			
+			timer?.invalidate()
+			
+		}
+		
+	}
+	
+	func formattedTime(totalSeconds: Int) -> String {
+		
+		let seconds : Int = durationInSeconds! % 60;
+		let minutes : Int = (durationInSeconds! / 60) % 60;
+		let hours : Int = durationInSeconds! / 3600;
+		
+		return String.init(format: "%02d:%02d:%02d", hours, minutes, seconds);
+	}
 
 }

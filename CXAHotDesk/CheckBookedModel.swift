@@ -10,9 +10,12 @@ import UIKit
 
 class CheckBookedModel: NSObject {
 	
+	var instanceVC : ResourcesViewController?
+	let user = UserDefaults.standard.string(forKey: "currentUser")!
 	
 	func checkBooked(user: String, currentDateTime: String, VC: ResourcesViewController) {
 		
+		instanceVC = VC
 		let url = URL(string: "http://neoville.space/checkcurrentlybooked.php")
 		var request = URLRequest(url: url!)
 		request.httpMethod = "POST"
@@ -28,7 +31,6 @@ class CheckBookedModel: NSObject {
 			}
 			
 			do {
-				
 				
 				if let jsonData = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary {
 					
@@ -91,7 +93,21 @@ class CheckBookedModel: NSObject {
 					
 					if (bool == 1) {
 						
+						let timeSpentString = jsonElement["TimeSpent"]! as? String
+						let durationString = jsonElement["Duration"]! as? String
+						
+						let timeSpent = Decimal(string: timeSpentString!)! * 60
+						let duration = Decimal(string: durationString!)! * 60
+						
+						VC.durationInSeconds = NSDecimalNumber(decimal: duration).intValue
+						VC.durationInSeconds = VC.durationInSeconds! - NSDecimalNumber(decimal: timeSpent).intValue
+						
 						DispatchQueue.main.async {
+							
+							VC.timer = Timer.scheduledTimer(timeInterval: 1.0, target: VC, selector: #selector(VC.timerTickStart), userInfo: nil, repeats: true)
+							
+							NotificationCenter.default.addObserver(VC, selector: #selector(VC.pauseTimer), name: .UIApplicationDidEnterBackground, object: nil)
+							NotificationCenter.default.addObserver(VC, selector: #selector(VC.resumeTimer), name: .UIApplicationWillEnterForeground, object: nil)
 							
 							VC.outletEndSession.isHidden = false
 							VC.lblResourceID.isHidden = false
@@ -99,7 +115,6 @@ class CheckBookedModel: NSObject {
 							
 							VC.lblResourceID.text = jsonElement["ResourceID"]! as? String
 							VC.outletEndSession.setTitle("End Session", for: .normal)
-							VC.lblTimerDescription.text = "Timer Start"
 							
 						}
 						
@@ -165,4 +180,5 @@ class CheckBookedModel: NSObject {
 		
 		task.resume()
 	}
+	
 }
