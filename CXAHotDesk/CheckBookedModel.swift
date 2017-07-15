@@ -99,6 +99,7 @@ class CheckBookedModel: NSObject {
 							
 							VC.lblResourceID.text = jsonElement["ResourceID"]! as? String
 							VC.outletEndSession.setTitle("End Session", for: .normal)
+							VC.lblTimerDescription.text = "Timer Start"
 							
 						}
 						
@@ -112,6 +113,9 @@ class CheckBookedModel: NSObject {
 								DispatchQueue.main.async {
 									
 									VC.lblTimerDescription.isHidden = false
+									VC.outletEndSession.isHidden = true
+									VC.lblResourceID.isHidden = true
+									
 									VC.lblTimerDescription.text = "You do not have any booked resources."
 									
 									VC.booked = false
@@ -143,6 +147,14 @@ class CheckBookedModel: NSObject {
 				else {
 					
 					print("Could not parse JSON!")
+				}
+				
+				if (VC.presentedViewController != nil) {
+					
+					DispatchQueue.main.async {
+						
+						VC.dismiss(animated: false, completion: nil)
+					}
 				}
 			}
 			catch {

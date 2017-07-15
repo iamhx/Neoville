@@ -19,6 +19,7 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 	var resources = ResourceTypeModel()
 	var resourceType : String?
 	var booked : Bool = false
+	let username = UserDefaults.standard.string(forKey: "currentUser")
 	
 	@IBOutlet weak var lblResourceID: UILabel!
 	@IBOutlet weak var lblTimerDescription: UILabel!
@@ -26,27 +27,162 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 	
 	
 	@IBAction func btnEndSession(_ sender: UIButton) {
+		
+		if (outletEndSession.titleLabel?.text == "Cancel Session") {
+			
+			let alert = UIAlertController(title: "Confirm", message: "Do you wish to cancel your session?", preferredStyle: .alert)
+			
+			let yesAction = UIAlertAction(title: "Cancel Session", style: .destructive, handler: { action in
+			
+				self.showOverlayOnTask(message: "Please wait...")
+				self.updateEndDateTime(user: self.username!, endDateTime: self.getCurrentDate(), completedOrCancelled: "Cancelled")
+			})
+			
+			let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+			
+			alert.addAction(yesAction)
+			alert.addAction(noAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+		else if (outletEndSession.titleLabel?.text == "End Session") {
+			
+			let alert = UIAlertController(title: "Confirm", message: "Do you wish to end your session?", preferredStyle: .alert)
+			
+			let yesAction = UIAlertAction(title: "End Session", style: .destructive, handler: { action in
+				
+				self.showOverlayOnTask(message: "Please wait...")
+				self.updateEndDateTime(user: self.username!, endDateTime: self.getCurrentDate(), completedOrCancelled: "Completed")
+			})
+			
+			let noAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+			
+			alert.addAction(yesAction)
+			alert.addAction(noAction)
+			self.present(alert, animated: true, completion: nil)
+		}
 	}
 	
+	func updateEndDateTime(user: String, endDateTime: String, completedOrCancelled: String) {
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		let parsedEndDate : String = dateFormatter.string(from: Date())
+		
+		let url = URL(string: "http://neoville.space/updatebooking.php")
+		var request = URLRequest(url: url!)
+		request.httpMethod = "POST"
+		let postString = "username=\(user)&endDateTime=\(parsedEndDate)&completedOrCancelled=\(completedOrCancelled)"
+		request.httpBody = postString.data(using: .utf8)
+		
+		let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+			
+			guard data != nil else {
+				
+				print("No data found")
+				return
+			}
+			
+			do {
+				
+				if let jsonData = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as? NSDictionary {
+					
+					let success = jsonData.value(forKey: "success") as! Bool
+					
+					if (success) {
+						
+						
+						DispatchQueue.main.async {
+							
+							self.dismiss(animated: false, completion: { action in
+								
+								self.promptMessage(user: user)
+							})
+						}
+						
+						return
+					}
+					else {
+						
+						DispatchQueue.main.async {
+							
+							print("Could not end/cancel session!")
+						}
+						return
+					}
+				}
+				else {
+					
+					DispatchQueue.main.async {
+						
+						self.dismiss(animated: false, completion: { action in
+							
+							print("Error: Could not parse JSON!")
+						})
+					}
+				}
+			}
+			catch {
+				
+				DispatchQueue.main.async {
+					
+					self.dismiss(animated: false, completion: { action in
+						
+						print("Error: Request failed!")
+					})
+				}
+			}
+		})
+		
+		task.resume()
+	}
+	
+	func promptMessage(user: String) {
+	
+		let alert = UIAlertController(title: "Success", message: "Successfully cancelled/ended resource.", preferredStyle: .alert)
+		let okAction = UIAlertAction(title: "OK", style: .default, handler: {action in
+		
+			CheckBookedModel().checkBooked(user: user, currentDateTime: self.getCurrentDate(), VC: self)
+		})
+		
+		alert.addAction(okAction)
+		self.present(alert, animated: true, completion: nil)
+	}
+
+	
+	
 	@IBOutlet weak var resourcesTableView: UITableView!
+	
+	func getCurrentDate() -> String {
+		
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		let currentDate = dateFormatter.string(from: Date())
+		
+		return currentDate
+	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 		
-		let username = UserDefaults.standard.string(forKey: "currentUser")
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		let currentDate = dateFormatter.string(from: Date())
-		
 		self.resourcesTableView.delegate = self
 		self.resourcesTableView.dataSource = self
 		
 		resources.delegate = self
 		resources.downloadItems()
-		CheckBookedModel().checkBooked(user: username!, currentDateTime: currentDate, VC: self)
+		CheckBookedModel().checkBooked(user: username!, currentDateTime: getCurrentDate(), VC: self)
+		
+		let refreshItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshDetails))
+		
+		self.navigationItem.rightBarButtonItem = refreshItem
     }
+	
+	func refreshDetails() {
+		
+		showOverlayOnTask(message: "Refreshing...")
+		CheckBookedModel().checkBooked(user: username!, currentDateTime: getCurrentDate(), VC: self)
+	}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,7 +215,7 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 		
 		if (self.booked == true) {
 			
-			let alert = UIAlertController(title: "Unable to book resource", message: "You can only book one resource at a time. Please cancel the session if you wish to book another resource.", preferredStyle: .alert)
+			let alert = UIAlertController(title: "You can only book one resource at a time", message: "Please cancel or end the session if you wish to book another resource.", preferredStyle: .alert)
 			
 			let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
 			
@@ -91,8 +227,8 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 			let item = feedItems[indexPath.row] as! ResourceTypeModel
 			resourceType = item.resourceType
 			self.performSegue(withIdentifier: "showBookPeriod", sender: self)
-			resourcesTableView.deselectRow(at: indexPath, animated: true)
 		}
+		resourcesTableView.deselectRow(at: indexPath, animated: true)
 	}
 	
     // MARK: - Navigation

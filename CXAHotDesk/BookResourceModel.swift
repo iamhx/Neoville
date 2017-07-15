@@ -58,7 +58,7 @@ class BookResourceModel: NSObject {
 							
 							VC.dismiss(animated: false, completion: { action in
 								
-								self.promptMessage(message: "The username or password that you have entered is incorrect. Please try again.", VC: VC)
+								self.promptMessage(message: "Could not book resource.", VC: VC)
 							})
 						}
 						return
