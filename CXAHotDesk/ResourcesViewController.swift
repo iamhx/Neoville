@@ -278,6 +278,7 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 		if (durationInSeconds! <= 0) {
 			
 			timer?.invalidate()
+			updateEndDateTime(user: username!, endDateTime: getCurrentDate(), completedOrCancelled: "Completed")
 			
 		}
 		
