@@ -42,28 +42,6 @@ class BookPeriodViewController: UIViewController, UITableViewDelegate, UITableVi
 			let startDateTime = dateFormatter.string(from: startDate)
 			let endDateTime = dateFormatter.string(from: endDate)
 			CheckAvailableModel().checkAvailable(resourceType: resourceType!, startDateTime: startDateTime, endDateTime: endDateTime, VC: self)
-			
-			if (resourceIDs.count > 0) {
-				
-				DispatchQueue.main.async {
-					
-					self.dismiss(animated: false, completion: { action in
-						
-						self.availResourcesTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .automatic)
-					})
-				}
-			}
-			else {
-				
-				DispatchQueue.main.async {
-					
-					self.dismiss(animated: false, completion: { action in
-						
-						print("No available resources")
-					})
-				}
-			}
-
 		}
 	}
 	

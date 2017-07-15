@@ -44,8 +44,28 @@ class CheckAvailableModel: NSObject {
 					}
 					
 					result = resourceIDs
-					
 					VC.resourceIDs = result
+					
+					if (VC.resourceIDs.count > 0) {
+						
+						DispatchQueue.main.async {
+							
+							VC.dismiss(animated: false, completion: { action in
+								
+								VC.availResourcesTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .automatic)
+							})
+						}
+					}
+					else {
+						
+						DispatchQueue.main.async {
+							
+							VC.dismiss(animated: false, completion: { action in
+								
+								// no avail resources
+							})
+						}
+					}
 				}
 				else {
 					

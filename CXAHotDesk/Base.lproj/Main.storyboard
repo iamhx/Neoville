@@ -369,8 +369,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUV-Rx-46G">
-                                <rect key="frame" x="123" y="569" width="130" height="33"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUV-Rx-46G">
+                                <rect key="frame" x="122" y="569" width="130" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="ggj-OA-4aa"/>
@@ -384,6 +384,9 @@
                                         <integer key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnEndSession:" destination="Gdy-Mt-ulj" eventType="touchUpInside" id="XDE-CY-55D"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book A Resource" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FuB-6w-a6Y">
                                 <rect key="frame" x="95" y="72" width="185" height="28"/>
@@ -391,8 +394,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have any booked resources." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwf-TF-k5F">
-                                <rect key="frame" x="16" y="500" width="343" height="61"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You do not have any booked resources." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwf-TF-k5F">
+                                <rect key="frame" x="16" y="500" width="342" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="KVj-W4-5jT"/>
                                 </constraints>
@@ -400,7 +403,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEST-01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6a3-pS-z0w">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEST-01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6a3-pS-z0w">
                                 <rect key="frame" x="140" y="468" width="95" height="30"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="25"/>
                                 <color key="textColor" red="0.94937402010000005" green="0.69291955230000002" blue="0.1251884103" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -428,6 +431,9 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Fw7-8u-WdP"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="lblResourceID" destination="6a3-pS-z0w" id="2dc-e0-NlO"/>
+                        <outlet property="lblTimerDescription" destination="wwf-TF-k5F" id="b4R-U3-VeS"/>
+                        <outlet property="outletEndSession" destination="bUV-Rx-46G" id="Aug-CW-r16"/>
                         <outlet property="resourcesTableView" destination="kuf-bb-e9e" id="XpM-Yi-efe"/>
                         <segue destination="y08-vO-0Rx" kind="show" identifier="showBookPeriod" id="Rxf-Q6-8Wi"/>
                     </connections>
@@ -621,7 +627,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StartDateTime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYZ-pU-fJt">
-                                <rect key="frame" x="132.5" y="273" width="110" height="20"/>
+                                <rect key="frame" x="133" y="272.5" width="110" height="20"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -633,11 +639,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTU-Px-Ety">
-                                <rect key="frame" x="101" y="501.5" width="174" height="44.5"/>
+                                <rect key="frame" x="101" y="502" width="174" height="45"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="174" id="9Aw-IL-yAj"/>
-                                    <constraint firstAttribute="height" constant="44.5" id="Hgh-nY-KYY"/>
+                                    <constraint firstAttribute="height" constant="45" id="aYX-cn-gaa"/>
+                                    <constraint firstAttribute="width" constant="174" id="jjV-Jj-CD7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="18"/>
                                 <state key="normal" title="Confirm booking">
@@ -653,7 +659,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khb-pC-OBu">
-                                <rect key="frame" x="179.5" y="323.5" width="16" height="20"/>
+                                <rect key="frame" x="180" y="323.5" width="16" height="20"/>
                                 <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -667,18 +673,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.54477393630000004" green="0.2156767547" blue="0.57527351380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uYT-45-6m7" firstAttribute="centerX" secondItem="8m0-tO-bMz" secondAttribute="centerX" id="0YB-Mx-bVR"/>
-                            <constraint firstItem="Cq7-c4-bKS" firstAttribute="centerX" secondItem="8m0-tO-bMz" secondAttribute="centerX" id="4h9-ta-cya"/>
-                            <constraint firstItem="s7L-K8-qxS" firstAttribute="top" secondItem="oTU-Px-Ety" secondAttribute="bottom" constant="77" id="5uC-kv-Z32"/>
-                            <constraint firstItem="khb-pC-OBu" firstAttribute="centerX" secondItem="8m0-tO-bMz" secondAttribute="centerX" id="BLF-6F-vVz"/>
-                            <constraint firstItem="uYT-45-6m7" firstAttribute="top" secondItem="YVB-Yb-1FW" secondAttribute="bottom" constant="74" id="Doe-XP-t5t"/>
-                            <constraint firstItem="cYZ-pU-fJt" firstAttribute="centerX" secondItem="8m0-tO-bMz" secondAttribute="centerX" id="HA4-vN-VtS"/>
-                            <constraint firstItem="Cq7-c4-bKS" firstAttribute="top" secondItem="khb-pC-OBu" secondAttribute="bottom" constant="28.5" id="I2G-Tf-oUN"/>
-                            <constraint firstItem="oTU-Px-Ety" firstAttribute="centerX" secondItem="Cq7-c4-bKS" secondAttribute="centerX" id="SkO-SD-VRL"/>
-                            <constraint firstItem="cYZ-pU-fJt" firstAttribute="top" secondItem="uYT-45-6m7" secondAttribute="bottom" constant="100" id="UBS-me-da2"/>
-                            <constraint firstItem="khb-pC-OBu" firstAttribute="centerY" secondItem="8m0-tO-bMz" secondAttribute="centerY" id="YZb-o6-ap2"/>
-                            <constraint firstItem="oTU-Px-Ety" firstAttribute="top" secondItem="Cq7-c4-bKS" secondAttribute="bottom" constant="110" id="bSr-wZ-zY1"/>
-                            <constraint firstItem="khb-pC-OBu" firstAttribute="top" secondItem="cYZ-pU-fJt" secondAttribute="bottom" constant="30.5" id="obS-Ln-zwX"/>
+                            <constraint firstItem="cYZ-pU-fJt" firstAttribute="centerX" secondItem="khb-pC-OBu" secondAttribute="centerX" id="35X-1q-ZaJ"/>
+                            <constraint firstItem="khb-pC-OBu" firstAttribute="centerX" secondItem="Cq7-c4-bKS" secondAttribute="centerX" id="8pH-hm-347"/>
+                            <constraint firstItem="uYT-45-6m7" firstAttribute="centerX" secondItem="cYZ-pU-fJt" secondAttribute="centerX" id="9i2-eZ-Hf9"/>
+                            <constraint firstItem="s7L-K8-qxS" firstAttribute="top" secondItem="oTU-Px-Ety" secondAttribute="bottom" constant="76" id="Al9-zq-CsX"/>
+                            <constraint firstItem="khb-pC-OBu" firstAttribute="top" secondItem="cYZ-pU-fJt" secondAttribute="bottom" constant="31" id="Fmj-m1-tcZ"/>
+                            <constraint firstItem="khb-pC-OBu" firstAttribute="centerY" secondItem="8m0-tO-bMz" secondAttribute="centerY" id="Xoz-9p-cex"/>
+                            <constraint firstItem="Cq7-c4-bKS" firstAttribute="top" secondItem="khb-pC-OBu" secondAttribute="bottom" constant="28" id="fs1-2w-PSI"/>
+                            <constraint firstItem="Cq7-c4-bKS" firstAttribute="centerX" secondItem="oTU-Px-Ety" secondAttribute="centerX" id="jxn-wT-fk7"/>
+                            <constraint firstItem="uYT-45-6m7" firstAttribute="top" secondItem="YVB-Yb-1FW" secondAttribute="bottom" constant="74" id="pfU-L0-uPB"/>
+                            <constraint firstItem="uYT-45-6m7" firstAttribute="centerX" secondItem="8m0-tO-bMz" secondAttribute="centerX" id="s5P-xI-6jL"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

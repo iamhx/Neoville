@@ -10,7 +10,6 @@ import UIKit
 
 class BookResourceModel: NSObject {
 
-	
 	func bookResource(user: String, resourceID: String, startDateTime: Date, endDateTime: Date, VC: ConfirmBookingViewController) {
 		
 		let dateFormatter = DateFormatter()

@@ -18,6 +18,16 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 	var feedItems: NSArray = NSArray()
 	var resources = ResourceTypeModel()
 	var resourceType : String?
+	var booked : Bool = false
+	
+	@IBOutlet weak var lblResourceID: UILabel!
+	@IBOutlet weak var lblTimerDescription: UILabel!
+	@IBOutlet weak var outletEndSession: UIButton!
+	
+	
+	@IBAction func btnEndSession(_ sender: UIButton) {
+	}
+	
 	@IBOutlet weak var resourcesTableView: UITableView!
 	
     override func viewDidLoad() {
@@ -25,11 +35,17 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 
         // Do any additional setup after loading the view.
 		
+		let username = UserDefaults.standard.string(forKey: "currentUser")
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		let currentDate = dateFormatter.string(from: Date())
+		
 		self.resourcesTableView.delegate = self
 		self.resourcesTableView.dataSource = self
 		
 		resources.delegate = self
 		resources.downloadItems()
+		CheckBookedModel().checkBooked(user: username!, currentDateTime: currentDate, VC: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,14 +76,24 @@ class ResourcesViewController: UIViewController, UITableViewDataSource, UITableV
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
+		
+		if (self.booked == true) {
+			
+			let alert = UIAlertController(title: "Unable to book resource", message: "You can only book one resource at a time. Please cancel the session if you wish to book another resource.", preferredStyle: .alert)
+			
+			let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+			
+			alert.addAction(okAction)
+			self.present(alert, animated: true, completion: nil)
+		}
+		else {
 
-		let item = feedItems[indexPath.row] as! ResourceTypeModel
-		resourceType = item.resourceType
-		self.performSegue(withIdentifier: "showBookPeriod", sender: self)
-		resourcesTableView.deselectRow(at: indexPath, animated: true)
-
+			let item = feedItems[indexPath.row] as! ResourceTypeModel
+			resourceType = item.resourceType
+			self.performSegue(withIdentifier: "showBookPeriod", sender: self)
+			resourcesTableView.deselectRow(at: indexPath, animated: true)
+		}
 	}
-	
 	
     // MARK: - Navigation
 
